@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SEND-Image Encryption</title>
+    <link rel="icon" href="send.png" type="image/png" />
+    <link href="styles.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .logo {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 50px;
+            height: 50px;
+        }
+        .text-center {
+            text-align: center;
+            position: absolute;
+            top: 20px;
+            width: 100%;
+        }
+        .input-container {
+            margin-top: 20px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .button-container button {
+            margin: 0 10px;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 30px;
+            background: linear-gradient(45deg, #007bff, #00bfff);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            width: 200px; /* Set a specific width for the button */
+        }
+        .button-container button:hover {
+            background: linear-gradient(45deg, #0056b3, #0099cc);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px) scale(1.05);
+        }
+        .button-container button:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .input-container input {
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid #007bff;
+            border-radius: 15px;
+            width: 300px;
+            transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .input-container input:focus {
+            border-color: #00bfff;
+            transform: scale(1.02);
+            box-shadow: 0 0 5px rgba(0, 191, 255, 0.5);
+            outline: none;
+        }
+        .container1 {
+  --transition: 350ms;
+  --folder-W: 120px;
+  --folder-H: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 10px;
+  background: linear-gradient(135deg, #6dd5ed, #2193b0);
+  border-radius: 15px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  height: calc(var(--folder-H) * 1.7);
+  position: relative;
+}
+
+.folder1 {
+  position: absolute;
+  top: -20px;
+  left: calc(50% - 60px);
+  animation: float 2.5s infinite ease-in-out;
+  transition: transform var(--transition) ease;
+}
+
+.folder1:hover {
+  transform: scale(1.05);
+}
+
+.folder1 .front-side,
+.folder1 .back-side {
+  position: absolute;
+  transition: transform var(--transition);
+  transform-origin: bottom center;
+}
+
+.folder1 .back-side::before,
+.folder1 .back-side::after {
+  content: "";
+  display: block;
+  background-color: white;
+  opacity: 0.5;
+  z-index: 0;
+  width: var(--folder-W);
+  height: var(--folder-H);
+  position: absolute;
+  transform-origin: bottom center;
+  border-radius: 15px;
+  transition: transform 350ms;
+  z-index: 0;
+}
+
+.container1:hover .back-side::before {
+  transform: rotateX(-5deg) skewX(5deg);
+}
+.container1:hover .back-side::after {
+  transform: rotateX(-15deg) skewX(12deg);
+}
+
+.folder1 .front-side {
+  z-index: 1;
+}
+
+.container1:hover .front-side {
+  transform: rotateX(-40deg) skewX(15deg);
+}
+
+.folder1 .tip {
+  background: linear-gradient(135deg, #ff9a56, #ff6f56);
+  width: 80px;
+  height: 20px;
+  border-radius: 12px 12px 0 0;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  top: -10px;
+  z-index: 2;
+}
+
+.folder1 .cover {
+  background: linear-gradient(135deg, #ffe563, #ffc663);
+  width: var(--folder-W);
+  height: var(--folder-H);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+.custom-file-upload {
+  font-size: 1.1em;
+  color: #ffffff;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: background var(--transition) ease;
+  display: inline-block;
+  width: 100%;
+  padding: 10px 5px;
+  position: relative;
+}
+
+.custom-file-upload:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.custom-file-upload input[type="file"] {
+  display: none;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+    </style>
+</head>
+<body>
+    <img src="send.png" alt="Logo" class="logo" onclick="location.href='home.html'">
+    <div class="text-center">
+        <h1>Secure Encryptor aNd Decryptor</h1>
+        <h2>Text Decryption Tool</h2><br/><br/>
+    </div>
+    <div class="input-container">
+        <div class="container1">
+            <div class="folder1">
+              <div class="front-side">
+                <div class="tip"></div>
+                <div class="cover"></div>
+              </div>
+              <div class="back-side cover"></div>
+            </div>
+            <label class="custom-file-upload">
+              <input class="title" type="file" />
+              Choose Text File
+            </label>
+          </div>
+          <br/>
+        <input type="password" id="passwordInput" placeholder="Enter password" />
+    </div>
+    <div class="button-container">
+        <button id="decryptButton" onclick="decryptButton()">Decrypt</button>
+    </div>
+</body>
+</html>
