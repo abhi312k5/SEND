@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SEND - Image Encryption</title>
+    <link rel="icon" href="https://i.ibb.co/0jg38gtW/send.png" type="image/png" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            background-color: #fff5ee;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            z-index: 100;
+        }
+
+        .header {
+            text-align: center;
+            width: 100%;
+            margin-bottom: 40px;
+            margin-top: 80px;
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header h2 {
+            color: #34495e;
+            font-size: 1.8em;
+        }
+
+        .main-container {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+
+        .input-container {
+            width: 100%;
+            max-width: 850px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .container1 {
+            --transition: 350ms;
+            --folder-W: 150px;
+            --folder-H: 100px;
+            width: 100%;
+            max-width: 350px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 30px;
+            background: linear-gradient(135deg, #6dd5ed, #2193b0);
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            height: calc(var(--folder-H) * 2.5);
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .folder1 {
+            position: absolute;
+            top: 33px;
+            left: 28%;
+            transform: translateX(-50%);
+            animation: float 2.5s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateX(-50%) translateY(0px); }
+            50% { transform: translateX(-50%) translateY(-20px); }
+        }
+
+        .folder1 .front-side,
+        .folder1 .back-side {
+            position: absolute;
+            transition: transform var(--transition);
+            transform-origin: bottom center;
+        }
+
+        .folder1 .tip {
+            background: linear-gradient(135deg, #ff9a56, #ff6f56);
+            width: 80px;
+            height: 20px;
+            border-radius: 12px 12px 0 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            position: absolute;
+            top: -10px;
+            z-index: 2;
+        }
+
+        .folder1 .cover {
+            background: linear-gradient(135deg, #ffe563, #ffc663);
+            width: var(--folder-W);
+            height: var(--folder-H);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+        }
+
+        .custom-file-upload {
+            width: 80%;
+            padding: 15px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            color: white;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .custom-file-upload:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .custom-file-upload input[type="file"] {
+            display: none;
+        }
+
+        #passwordInput {
+            width: 100%;
+            max-width: 400px;
+            padding: 15px 20px;
+            border: 2px solid #007bff;
+            border-radius: 15px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        #passwordInput:focus {
+            border-color: #00bfff;
+            box-shadow: 0 0 15px rgba(0, 191, 255, 0.2);
+            outline: none;
+            transform: translateY(-2px);
+        }
+
+        #imageNameOutput {
+            color: #007bff;
+            font-weight: bold;
+            font-size: 14px;
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        .button-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        #encryptButton {
+            padding: 15px 40px;
+            border: none;
+            border-radius: 30px;
+            background: linear-gradient(45deg, #007bff, #00bfff);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 200px;
+        }
+
+        #encryptButton:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(0, 123, 255, 0.3);
+            background: linear-gradient(45deg, #0056b3, #0099cc);
+        }
+
+        .result-container {
+            width: 100%;
+            position: relative;
+            margin-top: 20px;
+        }
+
+        #cipherTextOutput {
+            width: 100%;
+            height: 120px;
+            padding: 15px 40px 15px 15px;
+            border: 2px solid #007bff;
+            border-radius: 15px;
+            resize: none;
+            font-family: monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            background: #f8f9fa;
+        }
+
+        #cipherTextOutput:focus {
+            outline: none;
+            border-color: #00bfff;
+            box-shadow: 0 0 15px rgba(0, 191, 255, 0.2);
+        }
+
+        .copy-button {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #007bff;
+            font-size: 20px;
+            padding: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .copy-button:hover {
+            color: #0056b3;
+            transform: scale(1.1);
+        }
+
+        .status-message {
+            margin-top: 15px;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 14px;
+            text-align: center;
+            display: none;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .status-message.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status-message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            .header h2 {
+                font-size: 1.5em;
+            }
+            .main-container {
+                padding: 20px;
+            }
+            #passwordInput {
+                width: 90%;
+            }
+            .container1 {
+                width: 90%;
+            }
+        }
+        .footer {
+            width: 1521px;
+            position: relative;
+            background: #222;
+            color: #fff;
+            text-align: center;
+            padding: 30px 0;
+            overflow: hidden;
+            top: 75px;
+        }
+        .wave {
+            position: absolute;
+            top: -20px;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            background-size: 1000px 40px;
+            animation: wave-animation 4s linear infinite;
+        }
+        @keyframes wave-animation {
+            0% { background-position-x: 0px; }
+            100% { background-position-x: 1000px; }
+        }
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .social-icons a {
+            color: #fff;
+            font-size: 24px;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+            display: inline-block;
+        }
+        .social-icons a:hover {
+            transform: translateY(-5px);
+            color: #007bff;
+        }
+        .footer p {
+            margin-bottom: 15px;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <a href="../home.html">
+        <img src="https://i.ibb.co/0jg38gtW/send.png" alt="SEND Logo" class="logo">
+    </a>
+    
+    <div class="header">
+        <h1>Secure Encryptor aNd Decryptor</h1>
+        <h2>Image Encryption Tool</h2>
+    </div>
+    
+    <div class="main-container">
+        <div class="input-container">
+            <div class="container1">
+                <div class="folder1">
+                    <div class="front-side">
+                        <div class="tip"></div>
+                        <div class="cover"></div>
+                    </div>
+                    <div class="back-side cover"></div>
+                </div>
+                <label class="custom-file-upload">
+                    <input type="file" accept="image/*" />
+                    Choose Image
+                </label>
+                <div style="color: white; margin-top: 10px; font-size: 0.9em;">
+                    Maximum file size: 15 MB
+                </div>
+                
+            </div>
+            
+            <input type="file" id="imageInput" style="display:none;" accept="image/*" />
+            <input type="password" id="passwordInput" placeholder="Enter encryption password" />
+            <span id="imageNameOutput"></span>
+
+            <div class="button-container">
+                <button id="encryptButton">Encrypt</button>
+            </div>
+
+            <div class="result-container">
+                <textarea id="cipherTextOutput" readonly placeholder="Encrypted text will appear here"></textarea>
+                <button class="copy-button" onclick="copyCipherText()">
+                    <i class="fas fa-copy"></i>
+                </button>
+            </div>
+            
+            <div id="statusMessage" class="status-message"></div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script src="img.js"></script>
+    <script>
+        document.querySelector('.custom-file-upload input[type="file"]').addEventListener('change', function() {
+            const imageInput = document.getElementById('imageInput');
+            const imageNameOutput = document.getElementById('imageNameOutput');
+            
+            if (this.files[0]) {
+                imageInput.files = this.files;
+                imageNameOutput.textContent = this.files[0].name;
+            } else {
+                imageNameOutput.textContent = '';
+            }
+        });
+
+        document.getElementById('encryptButton').addEventListener('click', encryptButton);
+    </script>
+    <footer class="footer">
+        
+        <div class="social-icons">
+            <a href="https://www.youtube.com/@send_tool" target="_blank"><i class="fab fa-youtube" style="color: #FF0000"></i></a>
+            <a href="https://twitter.com/send_tool" target="_blank"><i class="fab fa-twitter" style="color: #1DA1F2"></i></a>
+            <a href="https://www.instagram.com/send_tool" target="_blank"><i class="fab fa-instagram" style="color: #E1306C"></i></a>
+            <a href="https://t.me/+Vq1zoqKFqPxkYzk1" target="_blank"><i class="fab fa-telegram" style="color: #0088CC"></i></a>
+            <a href="mailto:sendtool315@gmail.com" target="_blank"><i class="fas fa-envelope text-red-500 text-2xl" style="color: #Ea4335"></i></a>
+        </div>
+        <p>&copy; 2025 SEND - Secure Encryptor aNd Decryptor | All Rights Reserved</p>
+    </footer>
+</body>
+</html>

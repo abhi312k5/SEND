@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SEND - Secure Encryptor aNd Decryptor</title>
+    <link rel="icon" href="https://i.ibb.co/0jg38gtW/send.png" type="image/png" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <style>
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #faebd4;
+            --dark-color: #1a1a1a;
+            --text-color: #333;
+            --light-text: #fff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #faebd4;
+            line-height: 1.6;
+        }
+        
+        .container {
+            display: flex;
+            width: 100%;
+            flex: 1;
+        }
+        
+        .left {
+            background-color: var(--dark-color);
+            color: var(--light-text);
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .left img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .left img:hover {
+            transform: scale(1.1);
+        }
+        
+        .right {
+            background-color: #faebd4;
+            color: var(--text-color);
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 40px;
+        }
+        
+        .right nav {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 40px;
+        }
+        
+        .right nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .right nav a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        .right p {
+            font-size: 16px;
+            line-height: 1.5;
+            margin: 0 0 20px 0;
+            text-align: justify;
+        }
+        .right nav a:hover {
+            color: var(--primary-color);
+        }
+        
+        .right nav a:hover:after {
+            width: 100%;
+        }
+        
+        .content-box {
+            background-color: #fff5ee;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .content-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+            text-align: center;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark-color);
+            text-align: center;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            align-items: center;
+            margin-top: 2rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.1rem;
+            padding: 10px;
+            width: 100%;
+            max-width: 400px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .contact-item:hover {
+            background-color: rgba(0, 123, 255, 0.1);
+        }
+        
+        .contact-item i {
+            font-size: 1.5rem;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+        
+        .contact-item a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .contact-item a:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+        
+        .footer {
+            position: relative;
+            background: #222;
+            color: var(--light-text);
+            text-align: center;
+            padding: 30px 0;
+            overflow: hidden;
+        }
+        
+        .wave {
+            position: absolute;
+            top: -20px;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            background: url('https://i.ibb.co/w7VLzYM/wave.png');
+            background-size: 1000px 40px;
+            animation: wave-animation 4s linear infinite;
+        }
+        
+        @keyframes wave-animation {
+            0% { background-position-x: 0px; }
+            100% { background-position-x: 1000px; }
+        }
+        
+        .social-icons {
+            margin: 20px 0;
+        }
+        
+        .social-icons a {
+            color: var(--light-text);
+            margin: 0 15px;
+            font-size: 24px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .social-icons a:hover {
+            transform: translateY(-5px);
+            color: var(--primary-color);
+        }
+        
+        .footer p {
+            margin-top: 15px;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 992px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .left, .right {
+                width: 100%;
+            }
+            
+            .left {
+                min-height: 300px;
+            }
+            
+            .right nav {
+                justify-content: center;
+                margin-bottom: 20px;
+            }
+            
+            .right nav a {
+                margin: 0 10px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .right {
+                padding: 20px;
+            }
+            
+            .contact-item {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .social-icons a {
+                margin: 0 10px;
+                font-size: 22px;
+            }
+        }
+    </style>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="left">
+            <img src="https://i.ibb.co/0jg38gtW/send.png" alt="SEND Logo">
+        </div>
+        <div class="right content-box">
+            <nav>
+                <a href="home.html">Home</a>
+                <a href="learn.html">Learn</a>
+                <a href="contact.html">Contact Us</a>
+                <a href="FAQ.html">FAQ</a>
+            </nav>
+            <h2>Secure Encryptor aNd Decryptor</h2>
+            <p>In today's digital era, secure data transmission is essential due to the increasing use of web-based systems for communication and transactions. Our Secure Encryptor aNd Decryptor (SEND) website developed a web application that encrypts and decrypts text, images, audios, videos and various document formats like Text File, PDF, Microsoft Word, Microsoft Excel, Microsoft PowerPoint.
+               <br /><br />This website, designed with a client-server architecture, features a user-friendly interface. This website supports DES, Triple DES, AES encryption algorithms, ensuring secure data transmission while maintaining simplicity. A standout feature is its ability to handle multiple file formats, offering versatility for safeguarding diverse types of data during transmission or storage.
+               <br /><br /> In conclusion, the Secure Encryptor aNd Decryptor Web Application addresses the need for secure data handling with an efficient, user-friendly solution, emphasizing the importance of integrating robust encryption methods in modern web systems.</p>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        
+        <div class="social-icons">
+            <a href="https://www.youtube.com/@send_tool" target="_blank"><i class="fab fa-youtube" style="color: #FF0000"></i></a>
+            <a href="https://twitter.com/send_tool" target="_blank"><i class="fab fa-twitter" style="color: #1DA1F2"></i></a>
+            <a href="https://www.instagram.com/send_tool" target="_blank"><i class="fab fa-instagram" style="color: #E1306C"></i></a>
+            <a href="https://t.me/+Vq1zoqKFqPxkYzk1" target="_blank"><i class="fab fa-telegram" style="color: #0088CC"></i></a>
+            <a href="mailto:sendtool315@gmail.com" target="_blank"><i class="fas fa-envelope text-red-500 text-2xl" style="color: #Ea4335"></i></a>
+        </div>
+        <p>&copy; 2025 SEND - Secure Encryptor aNd Decryptor | All Rights Reserved</p>
+    </footer>
+</body>
+</html>

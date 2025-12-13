@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SEND - Image Decryption</title>
+    <link rel="icon" href="https://i.ibb.co/0jg38gtW/send.png" type="image/png" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
+    <script src="img.js" defer></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            background-color: #fff5ee;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .header {
+            text-align: center;
+            width: 100%;
+            margin-bottom: 40px;
+            margin-top: 80px;
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header h2 {
+            color: #34495e;
+            font-size: 1.8em;
+        }
+
+        .main-container {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+
+        .input-container {
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .input-container textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #007bff;
+            border-radius: 15px;
+            resize: vertical;
+            min-height: 120px;
+            font-family: Arial, sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .input-container textarea:focus {
+            border-color: #00bfff;
+            box-shadow: 0 0 10px rgba(0, 191, 255, 0.2);
+            outline: none;
+        }
+
+        .input-container input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #007bff;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .input-container input:focus {
+            border-color: #00bfff;
+            box-shadow: 0 0 10px rgba(0, 191, 255, 0.2);
+            outline: none;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 30px;
+            background: linear-gradient(45deg, #007bff, #00bfff);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+        }
+
+        .btn:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn i {
+            font-size: 18px;
+        }
+
+        #decryptedImageContainer {
+            margin-top: 30px;
+            width: 100%;
+            display: none;
+        }
+
+        #decryptedImage {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        #downloadButton {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            background: linear-gradient(45deg, #28a745, #20c997);
+            color: white;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        #downloadButton:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+        }
+
+        .error-message {
+            color: #dc3545;
+            background-color: #ffe6e6;
+            padding: 10px 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            display: none;
+            text-align: center;
+            width: 100%;
+        }
+
+        .loading-spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #007bff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .input-label {
+            color: #4a5568;
+            font-weight: bold;
+            margin-bottom: 5px;
+            align-items: left;
+        }
+        .footer {
+            width: 1521px;
+            position: relative;
+            background: #222;
+            color: #fff;
+            text-align: center;
+            padding: 30px 0;
+            overflow: hidden;
+            top: 247px;
+        }
+        .wave {
+            position: absolute;
+            top: -20px;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            background: url('https://i.ibb.co/w7VLzYM/wave.png');
+            background-size: 1000px 40px;
+            animation: wave-animation 4s linear infinite;
+        }
+        @keyframes wave-animation {
+            0% { background-position-x: 0px; }
+            100% { background-position-x: 1000px; }
+        }
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .social-icons a {
+            color: #fff;
+            font-size: 24px;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+            display: inline-block;
+        }
+        .social-icons a:hover {
+            transform: translateY(-5px);
+            color: #007bff;
+        }
+        .footer p {
+            margin-bottom: 15px;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <a href="../home.html">
+        <img src="https://i.ibb.co/0jg38gtW/send.png" alt="SEND Logo" class="logo">
+    </a>
+    <div class="header">
+        <h1>Secure Encryptor aNd Decryptor</h1>
+        <h2>Image Decryption Tool</h2>
+    </div>
+
+    <div class="main-container">
+        <div class="input-container">
+            <div class="input-label">Enter Encrypted Cipher Text (Image):</div>
+            <textarea id="cipherTextInput" placeholder="Paste encrypted cipher text here" spellcheck="false"></textarea>
+            <div class="input-label">Enter Password:</div>
+            <input type="password" id="passwordInput" placeholder="Enter password" />
+        </div>
+
+        <div class="error-message" id="errorMessage"></div>
+
+        <div class="button-container">
+            <button id="decryptButton" class="btn" onclick="decryptImage()">
+                <div class="loading-spinner" id="loadingSpinner"></div>
+                <i class="fas fa-lock-open"></i>
+                <span id="decryptButtonText">Decrypt</span>
+            </button>
+        </div>
+
+        <div id="decryptedImageContainer">
+            <img id="decryptedImage" alt="Decrypted Image" />
+            <a id="downloadButton" href="#" download="decrypted_image.png">
+                <i class="fas fa-download"></i>
+                Download Image
+            </a>
+        </div>
+    </div>
+    <footer class="footer">
+        
+        <div class="social-icons">
+            <a href="https://www.youtube.com/@send_tool" target="_blank"><i class="fab fa-youtube" style="color: #FF0000"></i></a>
+            <a href="https://twitter.com/send_tool" target="_blank"><i class="fab fa-twitter" style="color: #1DA1F2"></i></a>
+            <a href="https://www.instagram.com/send_tool" target="_blank"><i class="fab fa-instagram" style="color: #E1306C"></i></a>
+            <a href="https://t.me/+Vq1zoqKFqPxkYzk1" target="_blank"><i class="fab fa-telegram" style="color: #0088CC"></i></a>
+            <a href="mailto:sendtool315@gmail.com" target="_blank"><i class="fas fa-envelope text-red-500 text-2xl" style="color: #Ea4335"></i></a>
+        </div>
+        <p>&copy; 2025 SEND - Secure Encryptor aNd Decryptor | All Rights Reserved</p>
+    </footer>
+</body>
+</html>
+

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SEND - FAQ</title>
+        <link rel="icon" href="send.png" type="image/png" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+        <style>
+            :root {
+                --primary-color: #007bff;
+                --secondary-color: #fff5ee;
+                --dark-color: #1a1a1a;
+                --text-color: #333;
+                --light-text: #fff;
+            }
+            
+            body {
+                margin: 0;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                min-height: 100vh;
+                background-color: #fff5ee;
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .header {
+                position: relative;
+                padding: 20px;
+                text-align: center;
+            }
+            
+            .logo {
+                position: absolute;
+                top: -75px;
+                left: 10px;
+                width: 50px;
+                height: 50px;
+            }
+            
+            .content {
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 20px;
+                flex: 1;
+            }
+            
+            .faq-item {
+                margin-bottom: 20px;
+            }
+            
+            .faq-item h2 {
+                color: #333;
+                margin-bottom: 10px;
+            }
+            
+            .faq-item p {
+                line-height: 1.6;
+                color: #555;
+            }
+            
+            hr {
+                border: none;
+                border-top: 1px solid #ddd;
+                margin: 20px 0;
+            }
+            
+            .footer {
+                background: #222;
+                color: #fff;
+                text-align: center;
+                padding: 30px 0;
+                position: relative;
+                margin-top: auto;
+            }
+            
+            .right {
+                background-color: var(--secondary-color);
+                color: var(--text-color);
+                width: 1400px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                padding: 0px;
+            }
+        
+            .right nav {
+                display: flex;
+                justify-content: flex-end;
+                margin-top: 30px;
+                margin-bottom: 40px;
+            }
+            
+            .right nav a {
+                color: var(--text-color);
+                text-decoration: none;
+                margin-left: 20px;
+                font-size: 18px;
+                transition: all 0.3s ease;
+                position: relative;
+            }
+            
+            .right nav a:after {
+                content: '';
+                position: absolute;
+                width: 0;
+                height: 2px;
+                bottom: -5px;
+                left: 0;
+                background-color: var(--primary-color);
+                transition: width 0.3s ease;
+            }
+            
+            .right nav a:hover {
+                color: var(--primary-color);
+            }
+            
+            .right nav a:hover:after {
+                width: 100%;
+            }
+            
+            @media (max-width: 992px) {            
+                .right nav {
+                    justify-content: center;
+                    margin-bottom: 20px;
+                }
+                
+                .right nav a {
+                    margin: 0 10px;
+                }
+                
+                h1 {
+                    font-size: 2rem;
+                }
+                
+                h2 {
+                    font-size: 1.5rem;
+                }
+            }
+            
+            .wave {
+                position: absolute;
+                top: -20px;
+                left: 0;
+                width: 100%;
+                height: 40px;
+                background-size: 1000px 40px;
+                animation: wave-animation 4s linear infinite;
+            }
+            
+            @keyframes wave-animation {
+                0% { background-position-x: 0px; }
+                100% { background-position-x: 1000px; }
+            }
+            
+            .social-icons {
+                display: flex;
+                justify-content: center;
+                margin-top: 20px;
+            }
+            
+            .social-icons a {
+                color: #fff;
+                font-size: 24px;
+                margin: 0 15px;
+                transition: all 0.3s ease;
+                display: inline-block;
+            }
+            
+            .social-icons a:hover {
+                transform: translateY(-5px);
+                color: #007bff;
+            }
+            
+            .footer p {
+                margin-bottom: 15px;
+                font-size: 14px;
+                opacity: 0.8;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="right">
+            <nav>
+                <a href="home.html">Home</a>
+                <a href="learn.html">Learn</a>
+                <a href="contact.html">Contact Us</a>
+            </nav>
+        </div>
+        
+        <div class="header">
+            <a href="index.html">
+                <img src="https://i.ibb.co/0jg38gtW/send.png" alt="SEND Logo" class="logo">
+            </a>
+            <h1>Secure Encryptor aNd Decryptor</h1>
+            <h2>FAQ</h2>
+        </div>
+        
+        <div class="content">
+            <div class="faq-item">
+                <h2>What is SEND?</h2>
+                <p>SEND is a secure encryptor and decryptor that allows you to encrypt and decrypt messages using a secret key.</p>
+            </div>
+            <hr>
+            <div class="faq-item">
+                <h2>How to use SEND?</h2>
+                <p>To use SEND, you need to have a secret key. You can generate a secret key using the generate key button.</p>
+            </div>
+            <hr>
+            <div class="faq-item">
+                <h2>How to generate a secret key?</h2>
+                <p>To generate a secret key, you need to click the generate key button.</p>
+            </div>
+            <hr>
+            <div class="faq-item">
+                <h2>How to encrypt a message?</h2>
+                <p>To encrypt a message, you need to enter the message you want to encrypt and the secret key. Then click the encrypt button.</p>
+            </div>
+            <hr>
+            <div class="faq-item">
+                <h2>How to decrypt a message?</h2>
+                <p>To decrypt a message, you need to enter the message you want to decrypt and the secret key. Then click the decrypt button.</p>
+            </div>
+            <hr>
+            <div class="faq-item">
+                <h2>How to copy the encrypted/decrypted message?</h2>
+                <p>To copy the encrypted/decrypted message, you need to click the copy button.</p>
+            </div>
+            <hr>
+            <div class="faq-item">
+                <h2>What are files that can be encrypted/decrypted?</h2>
+                <p>Files that can be encrypted/decrypted are Text files, Microsoft Word, Excel, and PowerPoint files, images, videos, and audio files.</p>
+            </div>
+            <hr>         
+            <div class="faq-item">
+                <h2>What is the maximum file size that can be encrypted/decrypted?</h2>
+                <p>The maximum file size that can be encrypted/decrypted is 10 MB for audio and video files, text files, Microsoft Word, Excel, and PowerPoint files, and 15 MB for images files.</p>
+            </div>
+        </div>
+        
+        <footer class="footer">
+            <div class="social-icons">
+                <a href="https://www.youtube.com/@send_tool" target="_blank"><i class="fab fa-youtube" style="color: #FF0000"></i></a>
+                <a href="https://twitter.com/send_tool" target="_blank"><i class="fab fa-twitter" style="color: #1DA1F2"></i></a>
+                <a href="https://www.instagram.com/send_tool" target="_blank"><i class="fab fa-instagram" style="color: #E1306C"></i></a>
+                <a href="https://t.me/+Vq1zoqKFqPxkYzk1" target="_blank"><i class="fab fa-telegram" style="color: #0088CC"></i></a>
+                <a href="mailto:sendtool315@gmail.com" target="_blank"><i class="fas fa-envelope text-red-500 text-2xl" style="color: #Ea4335"></i></a>
+            </div>
+            <p>&copy; 2025 SEND - Secure Encryptor aNd Decryptor | All Rights Reserved</p>
+        </footer>
+    </body>
+</html>

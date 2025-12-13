@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SEND - Learn</title>
+        <link rel="icon" href="send.png" type="image/png" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+        <style>
+            :root {
+                --primary-color: #007bff;
+                --secondary-color: #fff5ee;
+                --dark-color: #1a1a1a;
+                --text-color: #333;
+                --light-text: #fff;
+            }
+            
+            body {
+                margin: 0;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                min-height: 100vh;
+                background-color: #fff5ee;
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .header {
+                position: relative;
+                padding: 20px;
+                text-align: center;
+            }
+            
+            .logo {
+                position: absolute;
+                top: -75px;
+                left: 10px;
+                width: 50px;
+                height: 50px;
+            }
+            
+            .content {
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 20px;
+                flex: 1;
+            }
+            
+            .learn-item {
+                margin-bottom: 20px;
+            }
+            
+            .learn-item h2 {
+                color: #333;
+                margin-bottom: 10px;
+            }
+            
+            .learn-item p {
+                line-height: 1.6;
+                color: #555;
+            }
+            
+            .learn-item ul {
+                margin-left: 20px;
+                color: #555;
+                line-height: 1.6;
+            }
+            
+            .learn-item table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 15px 0;
+            }
+            
+            .learn-item table, .learn-item th, .learn-item td {
+                border: 1px solid #ddd;
+            }
+            
+            .learn-item th, .learn-item td {
+                padding: 10px;
+                text-align: left;
+            }
+            
+            .learn-item th {
+                background-color: #f2f2f2;
+            }
+            
+            hr {
+                border: none;
+                border-top: 1px solid #ddd;
+                margin: 20px 0;
+            }
+            
+            .footer {
+                background: #222;
+                color: #fff;
+                text-align: center;
+                padding: 30px 0;
+                position: relative;
+                margin-top: auto;
+            }
+            
+            .right {
+                background-color: var(--secondary-color);
+                color: var(--text-color);
+                width: 1400px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                padding: 0px;
+            }
+        
+            .right nav {
+                display: flex;
+                justify-content: flex-end;
+                margin-bottom: 40px;
+                margin-top: 30px;
+            }
+            
+            .right nav a {
+                color: var(--text-color);
+                text-decoration: none;
+                margin-left: 20px;
+                font-size: 18px;
+                transition: all 0.3s ease;
+                position: relative;
+            }
+            
+            .right nav a:after {
+                content: '';
+                position: absolute;
+                width: 0;
+                height: 2px;
+                bottom: -5px;
+                left: 0;
+                background-color: var(--primary-color);
+                transition: width 0.3s ease;
+            }
+            
+            .right nav a:hover {
+                color: var(--primary-color);
+            }
+            
+            .right nav a:hover:after {
+                width: 100%;
+            }
+            
+            @media (max-width: 992px) {            
+                .right nav {
+                    justify-content: center;
+                    margin-bottom: 20px;
+                }
+                
+                .right nav a {
+                    margin: 0 10px;
+                }
+                
+                h1 {
+                    font-size: 2rem;
+                }
+                
+                h2 {
+                    font-size: 1.5rem;
+                }
+            }
+            
+            .wave {
+                position: absolute;
+                top: -20px;
+                left: 0;
+                width: 100%;
+                height: 40px;
+                background-size: 1000px 40px;
+                animation: wave-animation 4s linear infinite;
+            }
+            
+            @keyframes wave-animation {
+                0% { background-position-x: 0px; }
+                100% { background-position-x: 1000px; }
+            }
+            
+            .social-icons {
+                display: flex;
+                justify-content: center;
+                margin-top: 20px;
+            }
+            
+            .social-icons a {
+                color: #fff;
+                font-size: 24px;
+                margin: 0 15px;
+                transition: all 0.3s ease;
+                display: inline-block;
+            }
+            
+            .social-icons a:hover {
+                transform: translateY(-5px);
+                color: #007bff;
+            }
+            
+            .footer p {
+                margin-bottom: 15px;
+                font-size: 14px;
+                opacity: 0.8;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="right">
+            <nav>
+                <a href="home.html">Home</a>
+                <a href="contact.html">Contact Us</a>
+                <a href="FAQ.html">FAQ</a>
+            </nav>
+        </div>
+        
+        <div class="header">
+            <a href="index.html">
+                <img src="https://i.ibb.co/0jg38gtW/send.png" alt="SEND Logo" class="logo">
+            </a>
+            <h1>Secure Encryptor aNd Decryptor</h1>
+            <h2>Learn About Encryption and Decryption</h2>
+        </div>
+        
+        <div class="content">
+            <div class="learn-item">
+                <h2>1. What is Data Encryption?</h2>
+                <p>Data encryption is a vital method of protecting sensitive information by converting it from a readable format (plaintext) into an unreadable format (ciphertext). Only individuals with the appropriate decryption key or password can convert the ciphertext back into plaintext. This ensures that unauthorized users cannot make sense of the data even if they gain access to it.</p>
+                
+                <p><strong>Some key highlights:</strong></p>
+                <ul>
+                    <li><strong>Primary Types of Encryption:</strong>
+                        <ul>
+                            <li><strong>Asymmetric Encryption (Public Key Encryption):</strong> Uses two keys—a public key for encryption and a private key for decryption, ensuring secure communication.</li>
+                            <li><strong>Symmetric Encryption:</strong> Utilizes the same key for both encryption and decryption, making it faster but reliant on secure key sharing.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Hashing:</strong> Creates a fixed-length hash value for verifying data integrity rather than encryption.</li>
+                </ul>
+                
+                <p><strong>Why It's Important:</strong><br>
+                Encryption provides:</p>
+                <ul>
+                    <li><strong>Authentication:</strong> Verifies the source of the data.</li>
+                    <li><strong>Integrity:</strong> Ensures the data hasn't been tampered with during transmission.</li>
+                    <li><strong>Non-repudiation:</strong> Prevents the sender from denying their involvement in sending the data.</li>
+                </ul>
+                
+                <p>It's worth noting that while encryption secures the data's contents, it doesn't prevent unauthorized access to systems. Its role is to render stolen data useless to malicious actors, like cybercriminals seeking to exploit sensitive information.</p>
+            </div>
+            <hr>
+            
+            <div class="learn-item">
+                <h2>2. What is Data Decryption?</h2>
+                <p>Data decryption is the process of converting encrypted data (ciphertext) back into its original readable form (plaintext) using a decryption key or password. This is the counterpart to data encryption, and it's essential for authorized users to access and make sense of the protected information.</p>
+                
+                <p><strong>How It Works:</strong></p>
+                <ul>
+                    <li>When data is encrypted, an algorithm transforms it into an unintelligible format.</li>
+                    <li>To reverse this process, a decryption key (unique to the encryption method used) is applied, translating the ciphertext back into plaintext.</li>
+                    <li>The security of decryption depends on safeguarding this decryption key, as unauthorized access to the key compromises the data.</li>
+                </ul>
+                
+                <p><strong>Types of Decryption:</strong></p>
+                <ol>
+                    <li><strong>Symmetric Decryption:</strong>
+                        <ul>
+                            <li>Uses the same key for both encryption and decryption.</li>
+                            <li>Since only one key is involved, it is faster but requires secure key sharing between parties.</li>
+                            <li>Example: Decrypting data encrypted with the Advanced Encryption Standard (AES).</li>
+                        </ul>
+                    </li>
+                    <li><strong>Asymmetric Decryption:</strong>
+                        <ul>
+                            <li>Utilizes two keys—a public key for encryption and a private key for decryption.</li>
+                            <li>The private key must remain confidential, while the public key can be shared freely.</li>
+                            <li>Example: Decrypting a file sent using the RSA algorithm.</li>
+                        </ul>
+                    </li>
+                </ol>
+                
+                <p><strong>Why It's Important:</strong></p>
+                <ul>
+                    <li><strong>Access Control:</strong> Ensures only authorized individuals can read and use sensitive data.</li>
+                    <li><strong>Data Confidentiality:</strong> Prevents unauthorized users from interpreting intercepted or stolen data.</li>
+                </ul>
+            </div>
+            <hr>
+            
+            <div class="learn-item">
+                <h2>3. Types of Algorithms</h2>
+                <p>Both symmetric and asymmetric algorithms are essential in the world of encryption and decryption, but they differ significantly in their approach and use cases.</p>
+                
+                <p><strong>Symmetric Algorithms</strong></p>
+                <ul>
+                    <li><strong>Definition:</strong> These algorithms use the same key for both encryption (to convert plaintext to ciphertext) and decryption (to convert ciphertext back to plaintext).</li>
+                    <li><strong>Examples:</strong> AES (Advanced Encryption Standard), DES (Data Encryption Standard), and 3DES (Triple Data Encryption Standard).</li>
+                    <li><strong>Characteristics:</strong>
+                        <ul>
+                            <li><strong>Speed:</strong> Symmetric algorithms are typically faster than asymmetric algorithms because they involve simpler computations.</li>
+                            <li><strong>Key Management:</strong> The same key must be securely shared between the sender and receiver, which poses a risk if intercepted.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Use Cases:</strong> Ideal for encrypting large amounts of data, such as in file storage, database security, or VPNs.</li>
+                </ul>
+                
+                <p><strong>Asymmetric Algorithms</strong></p>
+                <ul>
+                    <li><strong>Definition:</strong> These algorithms use a pair of keys: a public key (for encryption) and a private key (for decryption). The public key is openly shared, while the private key remains confidential.</li>
+                    <li><strong>Examples:</strong> RSA (Rivest-Shamir-Adleman), ECC (Elliptic Curve Cryptography), and Diffie-Hellman.</li>
+                    <li><strong>Characteristics:</strong>
+                        <ul>
+                            <li><strong>Security:</strong> The public-private key mechanism ensures better security for communication between unknown parties.</li>
+                            <li><strong>Complexity:</strong> Asymmetric algorithms are computationally more intensive, making them slower than symmetric algorithms.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Use Cases:</strong> Commonly used for secure key exchange, digital signatures, and establishing encrypted communications (e.g., SSL/TLS in websites).</li>
+                </ul>
+                
+                <p><strong>Comparison</strong></p>
+                <table>
+                    <tr>
+                        <th>Aspect</th>
+                        <th>Symmetric Algorithms</th>
+                        <th>Asymmetric Algorithms</th>
+                    </tr>
+                    <tr>
+                        <td>Key Usage</td>
+                        <td>Same key for encryption and decryption</td>
+                        <td>Public key for encryption, private key for decryption</td>
+                    </tr>
+                    <tr>
+                        <td>Speed</td>
+                        <td>Faster</td>
+                        <td>Slower due to complex computations</td>
+                    </tr>
+                    <tr>
+                        <td>Security</td>
+                        <td>Relies on secure key sharing</td>
+                        <td>More secure for communication between parties</td>
+                    </tr>
+                    <tr>
+                        <td>Use Case</td>
+                        <td>Data storage, file encryption</td>
+                        <td>Digital signatures, secure key exchange</td>
+                    </tr>
+                </table>
+                
+                <p>Together, symmetric and asymmetric algorithms are often combined in hybrid cryptosystems, where asymmetric encryption is used to share a symmetric key securely, and the symmetric key is then used to encrypt the actual data.</p>
+            </div>
+            <hr>
+            
+            <div class="learn-item">
+                <h2>4. DES Algorithm</h2>
+                <p>Data Encryption Standard (DES) is a symmetric-key block cipher developed by IBM in the early 1970s, derived from the Lucifer cipher by Horst Feistel. It was adopted by the National Bureau of Standards (NBS) in 1977 as a Federal Information Processing Standard (FIPS). It became a widely used encryption standard for securing unclassified but sensitive data.</p>
+                
+                <p><strong>Algorithm Overview</strong></p>
+                <ul>
+                    <li><strong>Key Size:</strong> 56 bits (effective); originally 64 bits with 8 bits used for parity.</li>
+                    <li><strong>Block Size:</strong> 64 bits.</li>
+                    <li><strong>Structure:</strong> Balanced Feistel network with 16 rounds.</li>
+                </ul>
+                
+                <p><strong>Process:</strong> DES encrypts data by dividing the block into two halves and processing them alternately through substitution and permutation using S-boxes and P-boxes, along with a series of expansion, key mixing, and permutation functions. Decryption reverses the order of the round keys but uses the same algorithm.</p>
+                
+                <p><strong>NSA Involvement</strong><br>
+                IBM collaborated with the NSA, who modified the algorithm to strengthen it against differential cryptanalysis while reducing the key size to make it vulnerable to brute-force attacks. Despite concerns over potential backdoors, it was confirmed that the NSA did not insert any deliberate weaknesses into DES.</p>
+                
+                <p><strong>Security Concerns</strong><br>
+                DES faced criticism due to its short key length, making it susceptible to brute-force attacks. Key breaking demonstrations include:</p>
+                <ul>
+                    <li>1997: DESCHALL Project cracked DES using distributed computing.</li>
+                    <li>1998: Electronic Frontier Foundation (EFF) built "Deep Crack," a machine that broke DES in 56 hours.</li>
+                    <li>2008: Machines like COPACOBANA and RIVYERA significantly reduced the time and cost to break DES.</li>
+                </ul>
+                
+                <p><strong>Cryptanalysis</strong></p>
+                <ul>
+                    <li>Differential Cryptanalysis (Biham and Shamir, 1980s): Requires 2^47 chosen plaintexts.</li>
+                    <li>Linear Cryptanalysis (Matsui, 1993): Requires 2^43 known plaintexts.</li>
+                    <li>Davies' Attack: Specialized for DES, requiring 2^50 known plaintexts.</li>
+                </ul>
+                <p>Despite these, brute-force attacks remain the most practical means of breaking DES.</p>
+                
+                <p><strong>Replacement and Legacy</strong><br>
+                DES was officially withdrawn in 2005 and replaced by Advanced Encryption Standard (AES) in 2001 after an international competition. DES's successor, Triple DES (3DES), improved security by applying DES encryption three times but was slower and is now being phased out.</p>
+                
+                <p><strong>Impact</strong><br>
+                DES played a crucial role in developing modern cryptography. It spurred academic research and inspired new cryptanalysis techniques. According to Bruce Schneier, DES "galvanized the field of cryptanalysis" and set the standard for evaluating other block ciphers.</p>
+            </div>
+            <hr>
+            
+            <div class="learn-item">
+                <h2>5. 3DES Algorithm</h2>
+                <p><strong>Triple DES (3DES) Overview</strong><br>
+                Triple Data Encryption Algorithm (TDEA), commonly known as Triple DES (3DES), is a symmetric-key block cipher that applies the DES algorithm three times to each data block. Introduced in 1981, it was developed as a more secure alternative to DES due to DES's vulnerable 56-bit key size.</p>
+                
+                <p><strong>Algorithm Details</strong><br>
+                3DES operates on 64-bit blocks using key sizes of 112 or 168 bits. It follows a Feistel network structure, with 48 DES-equivalent rounds. The encryption process typically involves three steps: Encrypt with Key 1 (K1), Decrypt with Key 2 (K2), and Encrypt with Key 3 (K3). Decryption reverses the process. This approach enhances security and offers backward compatibility with DES.</p>
+                
+                <p><strong>Keying Options</strong><br>
+                There are three keying options:</p>
+                <ol>
+                    <li><strong>Option 1 (3TDEA):</strong> Three independent keys (168 bits total). This is the strongest variant.</li>
+                    <li><strong>Option 2 (2TDEA):</strong> Two independent keys where K1 = K3 (112 bits effective security). This was disallowed by NIST in 2015.</li>
+                    <li><strong>Option 3:</strong> All three keys are identical (K1 = K2 = K3), equivalent to single DES encryption, and not recommended.</li>
+                </ol>
+                
+                <p><strong>Security</strong><br>
+                Despite its improvements over DES, 3DES is still vulnerable:</p>
+                <ul>
+                    <li>Meet-in-the-middle attacks reduce its effective security.</li>
+                    <li>CVE-2016-2183 (Sweet32 attack) exposed vulnerabilities in 3DES due to its small block size (64 bits), making it prone to block collision attacks in protocols like TLS and OpenVPN.</li>
+                </ul>
+                <p>NIST estimates the effective security of 3DES at 112 bits for option 1 and 80 bits for option 2. As a result, NIST deprecated 3DES in 2019, allowing limited use until 2023, and plans full disallowance by 2024.</p>
+                
+                <p><strong>Use and Deprecation</strong><br>
+                Although many systems (like EMV payment cards, Microsoft Office, and Mozilla products) historically used 3DES, most have transitioned away from it. OpenSSL removed 3DES by default in 2016, labeling it a weak cipher. It has been largely replaced by the Advanced Encryption Standard (AES), which offers better security and efficiency.</p>
+                
+                <p><strong>Standards and Compliance</strong><br>
+                3DES has been defined in several standards, including:</p>
+                <ul>
+                    <li>RFC 1851 (1995)</li>
+                    <li>ANSI X9.52-1998 (withdrawn in 2008)</li>
+                    <li>NIST SP 800-67 Rev 2 (2017), withdrawn in 2024</li>
+                </ul>
+                
+                <p><strong>Conclusion</strong><br>
+                Triple DES provided a practical stopgap solution when DES was no longer secure, but it has now reached the end of its lifecycle due to inherent weaknesses and advancements in cryptanalysis and computational power. Modern cryptographic applications are advised to use stronger algorithms like AES.</p>
+            </div>
+            <hr>
+            
+            <div class="learn-item">
+                <h2>6. AES Algorithm</h2>
+                <p>Advanced Encryption Standard (AES), also known as Rijndael, is a symmetric-key block cipher selected by the U.S. National Institute of Standards and Technology (NIST) in 2001 to replace the aging Data Encryption Standard (DES). AES was developed by Belgian cryptographers Joan Daemen and Vincent Rijmen, and it became effective as the U.S. Federal Information Processing Standard (FIPS) 197.</p>
+                
+                <p><strong>Design and Structure</strong></p>
+                <ul>
+                    <li><strong>Block Size:</strong> 128 bits (fixed)</li>
+                    <li><strong>Key Sizes:</strong> 128, 192, or 256 bits</li>
+                    <li><strong>Rounds:</strong> 10 (128-bit key), 12 (192-bit key), 14 (256-bit key)</li>
+                </ul>
+                <p>AES uses a Substitution-Permutation Network (SPN), unlike DES, which uses a Feistel network.</p>
+                
+                <p><strong>Encryption Process</strong><br>
+                The input (plaintext) is divided into a 4×4 byte matrix, called the state. AES encryption transforms this state over several rounds consisting of:</p>
+                <ul>
+                    <li><strong>SubBytes:</strong> Non-linear byte substitution using an S-box.</li>
+                    <li><strong>ShiftRows:</strong> Row-wise shifting for diffusion.</li>
+                    <li><strong>MixColumns:</strong> Column-wise mixing for further diffusion.</li>
+                    <li><strong>AddRoundKey:</strong> XOR of the state with the round key.</li>
+                </ul>
+                <p>The final round omits the MixColumns step.</p>
+                
+                <p><strong>Security</strong><br>
+                AES has resisted most cryptanalytic attacks:</p>
+                <ul>
+                    <li>Biclique attacks marginally reduce AES-128 complexity from 2¹²⁸ to 2¹²⁶.1, but these are still impractical.</li>
+                    <li>Related-key attacks exist against AES-192 and AES-256 but require unrealistic conditions.</li>
+                    <li>Side-channel attacks (e.g., cache-timing, differential fault analysis) target AES implementations, not the algorithm itself.</li>
+                </ul>
+                
+                <p><strong>Government and Industry Use</strong><br>
+                AES is widely used in government, finance, and technology sectors. It's approved by the NSA for securing Top Secret information (with 192 or 256-bit keys). It's standardized in FIPS 197 and ISO/IEC 18033-3.</p>
+                
+                <p><strong>Performance</strong><br>
+                AES performs efficiently in both software and hardware. On modern CPUs with AES-NI instructions, it achieves high throughput and low latency, making it ideal for everything from smart cards to cloud servers.</p>
+                
+                <p><strong>Quantum Resistance</strong></p>
+                <ul>
+                    <li>AES-256 offers reasonable protection against quantum attacks, maintaining strength comparable to AES-128 against classical attacks.</li>
+                    <li>AES-128 and AES-192 are considered less quantum-resistant due to smaller key sizes.</li>
+                </ul>
+                
+                <p><strong>Validation and Compliance</strong><br>
+                NIST's Cryptographic Module Validation Program (CMVP) and Cryptographic Algorithm Validation Program (CAVP) ensure AES implementation compliance. FIPS 140-2 validation is required for U.S. government systems handling sensitive data.</p>
+            </div>
+        </div>
+        
+        <footer class="footer">
+            <div class="social-icons">
+                <a href="https://www.youtube.com/@send_tool" target="_blank"><i class="fab fa-youtube" style="color: #FF0000"></i></a>
+                <a href="https://twitter.com/send_tool" target="_blank"><i class="fab fa-twitter" style="color: #1DA1F2"></i></a>
+                <a href="https://www.instagram.com/send_tool" target="_blank"><i class="fab fa-instagram" style="color: #E1306C"></i></a>
+                <a href="https://t.me/+Vq1zoqKFqPxkYzk1" target="_blank"><i class="fab fa-telegram" style="color: #0088CC"></i></a>
+                <a href="mailto:sendtool315@gmail.com" target="_blank"><i class="fas fa-envelope text-red-500 text-2xl" style="color: #Ea4335"></i></a>
+            </div>
+            <p>&copy; 2025 SEND - Secure Encryptor aNd Decryptor | All Rights Reserved</p>
+        </footer>
+    </body>
+</html>

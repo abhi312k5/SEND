@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SEND - File Decryption</title>
+    <link rel="icon" href="https://i.ibb.co/0jg38gtW/send.png" type="image/png" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            min-height: 100vh;
+            justify-content: center;
+            align-items: flex-start;
+            flex-direction: column;
+            
+            background-color: #fff5ee;
+        }
+        .logo {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+        }
+
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 800px;
+            margin: 60px auto 0;
+            background-color: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .text-center {
+            text-align: center;
+            width: 100%;
+            margin-bottom: 40px;
+        }
+
+        .text-center h1 {
+            color: #2d3748;
+            margin-bottom: 5px;
+        }
+
+        .text-center h2 {
+            color: #4a5568;
+            font-weight: heavy;
+        }
+
+        .input-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px 0;
+        }
+
+        .cipher-input {
+            width: 100%;
+            height: 200px;
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px solid #007bff;
+            border-radius: 15px;
+            resize: vertical;
+            font-family: monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            background: white;
+        }
+
+        .cipher-input:focus {
+            border-color: #00bfff;
+            box-shadow: 0 0 0 3px rgba(0, 191, 225, 0.2);
+            outline: none;
+        }
+
+        .password-input {
+            width: 100%;
+            padding: 12px 20px;
+            border: 2px solid #007bff;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .password-input:focus {
+            border-color: #00bfff;
+            box-shadow: 0 0 0 3px rgba(0, 191, 225, 0.2);
+            outline: none;
+        }
+
+        .input-label {
+            color: #4a5568;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .button-container {
+            margin: 20px 0;
+            display: flex;
+            gap: 20px;
+        }
+
+        #decryptButton {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 30px;
+            background: linear-gradient(45deg, #007bff, #00bfff);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #decryptButton:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 123, 225, 0.3);
+        }
+
+        #decryptButton:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .result-container {
+            width: 100%;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .result-container a button {
+            padding: 12px 24px;
+            background: linear-gradient(45deg, #48bb78, #38a169);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            align-items: center;
+        }
+
+        .result-container a button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(72, 187, 120, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                margin: 20px;
+                padding: 20px;
+            }
+
+            .text-center h1 {
+                font-size: 24px;
+            }
+
+            .text-center h2 {
+                font-size: 18px;
+            }
+
+            .cipher-input, .password-input {
+                font-size: 14px;
+            }
+        }
+
+        .download-button {
+            display: inline-block;
+            padding: 12px 24px;
+            background: linear-gradient(45deg, #48bb78, #38a169);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+
+        .download-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(72, 187, 120, 0.2);
+        }
+
+        #downloadError {
+            color: #e53e3e;
+            margin-top: 10px;
+            text-align: center;
+            display: none;
+        }
+        .footer {
+            width: 1463px;
+            position: relative;
+            background: #222;
+            color: #fff;
+            text-align: center;
+            padding: 30px 30px;
+            overflow: hidden;
+            top: 247px;
+            left: 0;
+        }
+        .wave {
+            position: absolute;
+            top: -20px;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            background-size: 1000px 40px;
+            animation: wave-animation 4s linear infinite;
+        }
+        @keyframes wave-animation {
+            0% { background-position-x: 0px; }
+            100% { background-position-x: 1000px; }
+        }
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .social-icons a {
+            color: #fff;
+            font-size: 24px;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+            display: inline-block;
+        }
+        .social-icons a:hover {
+            transform: translateY(-5px);
+            color: #007bff;
+        }
+        .footer p {
+            margin-bottom: 15px;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <a href="../home.html">
+        <img src="https://i.ibb.co/0jg38gtW/send.png" alt="SEND Logo" class="logo">
+    </a>
+    <div class="text-center">
+        <h1>Secure Encryptor aNd Decryptor</h1>
+        <h2>File Decryption Tool</h2>
+    </div>
+    <div class="main-container">
+        
+        <div class="input-container">
+            <div class="input-label">Enter Encrypted Text:</div>
+            <textarea id="cipherInput" class="cipher-input" placeholder="Paste your encrypted text here"></textarea>
+            
+            <div class="input-label">Enter Password:</div>
+            <input type="password" id="passwordInput" class="password-input" placeholder="Enter decryption password" />
+        </div>
+        <div class="button-container">
+            <button id="decryptButton" onclick="decryptButtonNew()">Decrypt</button>
+        </div>
+        <div id="resultContainer" class="result-container"></div>
+        <div id="downloadError"></div>
+    </div>
+
+    <script>
+        function downloadDecryptedFile(blob, filename) {
+            try {
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                document.body.appendChild(a);
+
+                const url = window.URL.createObjectURL(blob);
+                a.href = url;
+                a.download = filename;
+
+                a.click();
+
+                window.URL.revokeObjectURL(url);
+                document.body.removeChild(a);
+
+                return true;
+            } catch (error) {
+                console.error('Download error:', error);
+                document.getElementById('downloadError').textContent = 'Error downloading file. Please try again.';
+                document.getElementById('downloadError').style.display = 'block';
+                return false;
+            }
+        }
+
+        async function decryptButtonNew() {
+            const cipherInput = document.getElementById('cipherInput');
+            const passwordInput = document.getElementById('passwordInput');
+            const encryptedText = cipherInput.value;
+            const password = passwordInput.value;
+            const downloadError = document.getElementById('downloadError');
+            downloadError.style.display = 'none';
+
+            if (!encryptedText || !password) {
+                alert('Please enter both encrypted text and password');
+                return;
+            }
+
+            const button = document.getElementById('decryptButton');
+            const originalText = button.textContent;
+            button.textContent = 'Decrypting...';
+            button.disabled = true;
+
+            try {
+                const decryptedFile = await decryptFile(encryptedText, password);
+                
+                const resultContainer = document.getElementById('resultContainer');
+                resultContainer.innerHTML = `
+                    <button onclick="downloadDecryptedFile(new Blob([${decryptedFile}], {type: '${decryptedFile.type}'}, '${decryptedFile.name}')" class="download-button">
+                        Download Decrypted File
+                    </button>
+                `;
+
+                downloadDecryptedFile(decryptedFile, decryptedFile.name);
+            } catch (error) {
+                console.error('Decryption error:', error);
+                alert(error.message || 'Decryption failed. Please check your password.');
+                downloadError.textContent = 'Decryption failed. Please check your password and try again.';
+                downloadError.style.display = 'block';
+            } finally {
+                button.textContent = originalText;
+                button.disabled = false;
+            }
+        }
+    </script>
+    <script src="file.js"></script>
+    <footer class="footer">
+        
+        <div class="social-icons">
+            <a href="https://www.youtube.com/@send_tool" target="_blank"><i class="fab fa-youtube" style="color: #FF0000"></i></a>
+            <a href="https://twitter.com/send_tool" target="_blank"><i class="fab fa-twitter" style="color: #1DA1F2"></i></a>
+            <a href="https://www.instagram.com/send_tool" target="_blank"><i class="fab fa-instagram" style="color: #E1306C"></i></a>
+            <a href="https://t.me/+Vq1zoqKFqPxkYzk1" target="_blank"><i class="fab fa-telegram" style="color: #0088CC"></i></a>
+            <a href="mailto:sendtool315@gmail.com" target="_blank"><i class="fas fa-envelope text-red-500 text-2xl" style="color: #Ea4335"></i></a>
+        </div>
+        <p>&copy; 2025 SEND - Secure Encryptor aNd Decryptor | All Rights Reserved</p>
+    </footer>
+</body>
+</html>
